@@ -62,16 +62,16 @@ public class ForecastFragment extends Fragment {
 
 	// see fatchweathertask for ^ code
 
-	 android.widget.ListView listView = (android.widget.ListView)getActivity()
-	  .findViewById(com.nullcognition.udacitydevelopingandriodapps.R.id.listview_forecast);
+	final android.widget.ListView listView = (android.widget.ListView)rootView.findViewById(com.nullcognition.udacitydevelopingandriodapps.R.id.listview_forecast);
+// the first time you tried to get the listview reference with getActivity, before this rootView in the create view was returned
+	// remember to use the local data for the most recent uptodate, for other assignments and methods
 
-	final android.widget.ListView listViewFinal = listView;
 
 	listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
 	  @Override
 	  public void onItemClick(android.widget.AdapterView<?> parent, android.view.View view, int position, long id){
-		String string=(String)listViewFinal.getAdapter().getItem(position);
+		String string=(String)listView.getAdapter().getItem(position);
 		android.widget.Toast.makeText(getActivity(), "you clicked on " + string , android.widget.Toast.LENGTH_SHORT).show();
 
 	  }
