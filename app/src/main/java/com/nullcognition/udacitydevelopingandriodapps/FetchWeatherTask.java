@@ -200,7 +200,7 @@ class FetchWeatherTask extends android.os.AsyncTask<String, Void, String[]> {
 	// see constructor, which takes in a reference to the calling activity
 
 	if(result != null){
-	// array adapter auto calls adapter.notifydatasetchanngged() on each insertion and deletion
+	  // array adapter auto calls adapter.notifydatasetchanngged() on each insertion and deletion
 	  android.widget.ArrayAdapter<String> arrayAdapter = new android.widget.ArrayAdapter<String>(activity, //getActivity(),
 																								 com.nullcognition.udacitydevelopingandriodapps.R.layout.list_item_forcast,
 																								 com.nullcognition.udacitydevelopingandriodapps.R.id.list_item_forecast_textview);
