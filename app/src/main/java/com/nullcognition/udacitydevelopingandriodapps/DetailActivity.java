@@ -20,14 +20,13 @@ public class DetailActivity extends Activity {
 	  getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
 	}
 
-
   }
 
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu){
 	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.menu_detail, menu);
+
 	return true;
   }
 
@@ -41,7 +40,11 @@ public class DetailActivity extends Activity {
 	//noinspection SimplifiableIfStatement
 	if(id == R.id.action_settings){
 	  startActivity(new android.content.Intent(this, SettingsActivity.class));
+
 	  return true;
+	}
+	if(id == com.nullcognition.udacitydevelopingandriodapps.R.id.action_share){
+
 	}
 
 	return super.onOptionsItemSelected(item);
@@ -52,18 +55,35 @@ public class DetailActivity extends Activity {
    */
   public static class PlaceholderFragment extends Fragment {
 
+	String forecastData;
+
 	public PlaceholderFragment(){
+	  setHasOptionsMenu(true);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(android.view.Menu menu, android.view.MenuInflater inflater){
+	  super.onCreateOptionsMenu(menu, inflater);
+
+	  inflater.inflate(R.menu.menu_detail, menu);
+	  MenuItem menuItem = menu.findItem(com.nullcognition.udacitydevelopingandriodapps.R.id.action_share);
+
+	  android.widget.ShareActionProvider shareActionProvider = (android.widget.ShareActionProvider)menuItem.getActionProvider();
+
+	  if(shareActionProvider != null){
+		shareActionProvider.setShareIntent(createShareIntent());
+	  }
+
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 	  View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
-
 	  try{
-		String forecastData = getActivity().getIntent().getExtras().getString(ForecastFragment.startDetailsIntentKey, "default");
-		android.widget.TextView textView = (android.widget.TextView)rootView.findViewById(
-		  com.nullcognition.udacitydevelopingandriodapps.R.id.textView);
+		forecastData = getActivity().getIntent().getExtras().getString(ForecastFragment.startDetailsIntentKey, "default");
+		android.widget.TextView textView = (android.widget.TextView)rootView
+		  .findViewById(com.nullcognition.udacitydevelopingandriodapps.R.id.textView);
 		textView.setText(forecastData);
 	  }
 	  catch(Exception e){
@@ -73,5 +93,16 @@ public class DetailActivity extends Activity {
 
 	  return rootView;
 	}
+
+	private android.content.Intent createShareIntent(){
+	  android.content.Intent shareIntent = new android.content.Intent(android.content.Intent.ACTION_SEND);
+
+	  shareIntent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+	  shareIntent.setType("text/plain");
+	  shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, forecastData);
+
+	  return shareIntent;
+	}
+
   }
 }

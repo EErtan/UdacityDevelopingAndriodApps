@@ -56,13 +56,15 @@ public class ForecastFragment extends Fragment {
 	return super.onOptionsItemSelected(inMenuItem);
   }
 
+
+
   private void updateWeather(){
 	FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity());
 
 	String postalCodeKeyExampleText = getActivity().getResources()
 												   .getString(com.nullcognition.udacitydevelopingandriodapps.R.string.pref_default_edittext_pref);
 	String postalCode = android.preference.PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext())
-															.getString(postalCodeKeyExampleText, "n2n1w4");
+													 .getString(postalCodeKeyExampleText, "n2n1w4");
 	// careful as the last value put here will remain in the shared pref memory till it is changed
 
 	weatherTask.execute(postalCode); // executing asynctask here

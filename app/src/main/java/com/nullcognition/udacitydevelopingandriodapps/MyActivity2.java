@@ -29,14 +29,20 @@ public class MyActivity2 extends Activity {
 	  getFragmentManager().beginTransaction().add(R.id.container, new ForecastFragment()).commit();
 	}
 
-	workingWithGson();
-
   }
 
-  private void workingWithGson(){
+  private void preferedLocation(){
+	String postal = android.preference.PreferenceManager.getDefaultSharedPreferences(this).getString("example_text", "n2n1w4");
+	android.net.Uri geoLocation = android.net.Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q", postal).build();
+
+	android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
+	intent.setData(geoLocation);
+
+	if(intent.resolveActivity(getPackageManager()) != null){ startActivity(intent); }
+	else{ android.util.Log.e(getClass().getSimpleName(), "Couldn't call the geoLocation intent"); }
+
 
   }
-
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu){
@@ -54,6 +60,9 @@ public class MyActivity2 extends Activity {
 	if(id == R.id.action_settings){
 	  startActivity(new android.content.Intent(this, SettingsActivity.class));
 	  return true;
+	}
+	if(id == com.nullcognition.udacitydevelopingandriodapps.R.id.action_location){
+	  preferedLocation();
 	}
 
 	return super.onOptionsItemSelected(item);
