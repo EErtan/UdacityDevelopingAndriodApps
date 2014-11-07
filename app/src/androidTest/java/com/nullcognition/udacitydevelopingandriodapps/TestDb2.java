@@ -8,7 +8,7 @@ import data.WeatherDbOpenHelper;
 
 public class TestDb2 extends android.test.AndroidTestCase {
 
-  public static final String LOG_TAG = TestDb.class.getSimpleName();
+  public static final String LOG_TAG = TestDb4.class.getSimpleName();
 
   public void testCreateDb() throws Throwable{
 	mContext.deleteDatabase(WeatherDbOpenHelper.DATABASE_NAME);
