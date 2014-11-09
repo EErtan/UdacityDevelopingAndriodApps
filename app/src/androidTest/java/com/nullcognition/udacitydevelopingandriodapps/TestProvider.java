@@ -269,6 +269,7 @@ public class TestProvider extends android.test.AndroidTestCase { // function nam
 								   .insert(WeatherEntry.CONTENT_URI, kalamazooWeatherValues);
 	assertTrue(weatherInsertUri != null);
   }
+	// test provider, lastest test of testUpdateAndReadWeather
 
   public void testUpdateAndReadWeather() {
 	insertKalamazooData();
