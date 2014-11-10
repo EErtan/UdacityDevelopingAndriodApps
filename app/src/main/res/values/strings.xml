@@ -20,5 +20,10 @@
 	<string name="pref_title_temp_units">Temperature Units</string>
 	<string name="action_location">Your Location</string>
 	<string name="action_share">Share</string>
+	<string name="pref_units_key">Units</string>
+	<string name="pref_units_metric">metric</string>
+	<string name="pref_units_imperial">imp</string>
+	<string name="pref_location_key">prefKey</string>
+	<string name="pref_location_default">prefDefault</string>
 
 </resources>
