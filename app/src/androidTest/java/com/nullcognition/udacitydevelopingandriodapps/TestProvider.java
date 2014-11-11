@@ -9,7 +9,7 @@ import data.WeatherContract.WeatherEntry;
 
 public class TestProvider extends android.test.AndroidTestCase { // function names must start with test
 
-
+	// test
   public static final String LOG_TAG = TestProvider.class.getSimpleName();
 
   // brings our database to an empty state
