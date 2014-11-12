@@ -311,7 +311,7 @@ public class TestProvider extends android.test.AndroidTestCase { // function nam
 	  null,
 	  null,
 	  null
-															  );
+																			   );
 
 	// Make the same update to the full ContentValues for comparison.
 	android.content.ContentValues kalamazooAltered = createKalamazooWeatherValues(locationRowId);
@@ -321,4 +321,28 @@ public class TestProvider extends android.test.AndroidTestCase { // function nam
 	int idx = weatherCursor.getColumnIndex(WeatherEntry.COLUMN_HUMIDITY);
 	assertEquals(-1, idx);
   }
+//
+//  public void testRemoveHumidityAndReadWeather() {
+//	insertKalamazooData();
+//
+//	mContext.getContentResolver().delete(WeatherEntry.CONTENT_URI,
+//										 WeatherEntry.COLUMN_HUMIDITY + " = " + locationRowId, null);
+//
+//	// A cursor is your primary interface to the query results.
+//	android.database.Cursor weatherCursor = mContext.getContentResolver().query(
+//	  WeatherEntry.CONTENT_URI,
+//	  null,
+//	  null,
+//	  null,
+//	  null
+//																			   );
+//
+//	// Make the same update to the full ContentValues for comparison.
+//	android.content.ContentValues kalamazooAltered = createKalamazooWeatherValues(locationRowId);
+//	kalamazooAltered.remove(WeatherEntry.COLUMN_HUMIDITY);
+//
+//	TestDb.validateCursor(weatherCursor, kalamazooAltered);
+//	int idx = weatherCursor.getColumnIndex(WeatherEntry.COLUMN_HUMIDITY);
+//	assertEquals(-1, idx);
+//  }
 }
