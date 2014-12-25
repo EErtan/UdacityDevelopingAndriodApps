@@ -1,4 +1,9 @@
 package com.nullcognition.udacitydevelopingandriodapps;
+import java.util.Date;
+
+import data.WeatherContract;
+import data.WeatherContract.WeatherEntry;
+
 /**
  * Created by ersin on 09/11/14 at 11:43 PM
  */
@@ -72,26 +77,26 @@ public class FetchWeatherTaskOut extends android.os.AsyncTask<String, Void, Stri
 
 	// First, check if the location with this city name exists in the db
 	android.database.Cursor cursor = mContext.getContentResolver().query(
-	  LocationEntry.CONTENT_URI,
-	  new String[]{LocationEntry._ID},
-	  LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
+	  WeatherContract.LocationEntry.CONTENT_URI,
+	  new String[]{WeatherContract.LocationEntry._ID},
+	  WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
 	  new String[]{locationSetting},
 	  null);
 
 	if (cursor.moveToFirst()) {
 	  android.util.Log.v(LOG_TAG, "Found it in the database!");
-	  int locationIdIndex = cursor.getColumnIndex(LocationEntry._ID);
+	  int locationIdIndex = cursor.getColumnIndex(WeatherContract.LocationEntry._ID);
 	  return cursor.getLong(locationIdIndex);
 	} else {
 	  android.util.Log.v(LOG_TAG, "Didn't find it in the database, inserting now!");
 	  android.content.ContentValues locationValues = new android.content.ContentValues();
-	  locationValues.put(LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
-	  locationValues.put(LocationEntry.COLUMN_CITY_NAME, cityName);
-	  locationValues.put(LocationEntry.COLUMN_COORD_LAT, lat);
-	  locationValues.put(LocationEntry.COLUMN_COORD_LONG, lon);
+	  locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
+	  locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_NAME, cityName);
+	  locationValues.put(WeatherContract.LocationEntry.COLUMN_COORD_LAT, lat);
+	  locationValues.put(WeatherContract.LocationEntry.COLUMN_COORD_LONG, lon);
 
 	  android.net.Uri locationInsertUri = mContext.getContentResolver()
-									  .insert(LocationEntry.CONTENT_URI, locationValues);
+									  .insert(WeatherContract.LocationEntry.CONTENT_URI, locationValues);
 
 	  return android.content.ContentUris.parseId(locationInsertUri);
 	}
@@ -199,7 +204,7 @@ public class FetchWeatherTaskOut extends android.os.AsyncTask<String, Void, Stri
 
 	  weatherValues.put(WeatherEntry.COLUMN_LOC_KEY, locationID);
 	  weatherValues.put(WeatherEntry.COLUMN_DATETEXT,
-						data.WeatherContract.getDbDateString(new Date(dateTime * 1000L)));
+						data.WeatherContract.getDbDateString((java.sql.Date)new Date(dateTime * 1000L)));
 	  weatherValues.put(WeatherEntry.COLUMN_HUMIDITY, humidity);
 	  weatherValues.put(WeatherEntry.COLUMN_PRESSURE, pressure);
 	  weatherValues.put(WeatherEntry.COLUMN_WIND_SPEED, windSpeed);

@@ -18,8 +18,13 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:gravity="center_vertical"
+	android:gravity="center_vertical|center_horizontal"
 	android:minHeight="?android:attr/listPreferredItemHeight"
+	android:drawableStart="@drawable/ic_launcher"
+	android:lines="2"
+	android:text="test&#xA;test"
+	android:cursorVisible="false"
+	android:backgroundTint="#ffc6fff5"
 	>
 
 </TextView>
