@@ -5,8 +5,8 @@ package com.nullcognition.udacitydevelopingandriodapps;
 
 public class Utility {
 
-  public static String getPreferredLocation(android.content.Context context){
-	android.content.SharedPreferences prefs = android.preference.PreferenceManager.getDefaultSharedPreferences(context);
-	return prefs.getString(context.getString(R.string.pref_location_key), context.getString(R.string.pref_location_default));
-  }
+   public static String getPreferredLocation(android.content.Context context){
+	  android.content.SharedPreferences prefs = android.preference.PreferenceManager.getDefaultSharedPreferences(context);
+	  return prefs.getString(context.getString(R.string.pref_location_key), context.getString(R.string.pref_location_default));
+   }
 }

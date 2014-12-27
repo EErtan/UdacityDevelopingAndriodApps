@@ -20,51 +20,51 @@ import android.view.MenuItem;
 
 public class MyActivity2 extends Activity {
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState){
-	super.onCreate(savedInstanceState);
+   @Override
+   protected void onCreate(Bundle savedInstanceState){
+	  super.onCreate(savedInstanceState);
 
-	setContentView(R.layout.activity_my_activity2);
-	if(savedInstanceState == null){
-	  getFragmentManager().beginTransaction().add(R.id.container, new ForecastFragment()).commit();
-	}
+	  setContentView(R.layout.activity_my_activity2);
+	  if(savedInstanceState == null){
+		 getFragmentManager().beginTransaction().add(R.id.container, new ForecastFragment()).commit();
+	  }
 
-  }
+   }
 
-  private void preferedLocation(){
-	String postal = android.preference.PreferenceManager.getDefaultSharedPreferences(this).getString("example_text", "n2n1w4");
-	android.net.Uri geoLocation = android.net.Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q", postal).build();
+   private void preferedLocation(){
+	  String postal = android.preference.PreferenceManager.getDefaultSharedPreferences(this).getString("example_text", "n2n1w4");
+	  android.net.Uri geoLocation = android.net.Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q", postal).build();
 
-	android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
-	intent.setData(geoLocation);
+	  android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
+	  intent.setData(geoLocation);
 
-	if(intent.resolveActivity(getPackageManager()) != null){ startActivity(intent); }
-	else{ android.util.Log.e(getClass().getSimpleName(), "Couldn't call the geoLocation intent"); }
+	  if(intent.resolveActivity(getPackageManager()) != null){ startActivity(intent); }
+	  else{ android.util.Log.e(getClass().getSimpleName(), "Couldn't call the geoLocation intent"); }
 
 
-  }
+   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu){
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.my_activity2, menu);
-	return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item){
-	// Handle action bar item clicks here. The action bar will
-	// automatically handle clicks on the Home/Up button, so long
-	// as you specify a parent activity in AndroidManifest.xml.
-	int id = item.getItemId();
-	if(id == R.id.action_settings){
-	  startActivity(new android.content.Intent(this, SettingsActivity.class));
+   @Override
+   public boolean onCreateOptionsMenu(Menu menu){
+	  // Inflate the menu; this adds items to the action bar if it is present.
+	  getMenuInflater().inflate(R.menu.my_activity2, menu);
 	  return true;
-	}
-	if(id == com.nullcognition.udacitydevelopingandriodapps.R.id.action_location){
-	  preferedLocation();
-	}
+   }
 
-	return super.onOptionsItemSelected(item);
-  }
+   @Override
+   public boolean onOptionsItemSelected(MenuItem item){
+	  // Handle action bar item clicks here. The action bar will
+	  // automatically handle clicks on the Home/Up button, so long
+	  // as you specify a parent activity in AndroidManifest.xml.
+	  int id = item.getItemId();
+	  if(id == R.id.action_settings){
+		 startActivity(new android.content.Intent(this, SettingsActivity.class));
+		 return true;
+	  }
+	  if(id == com.nullcognition.udacitydevelopingandriodapps.R.id.action_location){
+		 preferedLocation();
+	  }
+
+	  return super.onOptionsItemSelected(item);
+   }
 }

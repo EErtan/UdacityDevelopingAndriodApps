@@ -4,12 +4,12 @@ package com.nullcognition.udacitydevelopingandriodapps;
  */
 public class FullTestSuite {
 
-  public static junit.framework.Test suite(){
-	return new android.test.suitebuilder.TestSuiteBuilder(FullTestSuite.class).includeAllPackagesUnderHere().build();
-  }
+   public static junit.framework.Test suite(){
+	  return new android.test.suitebuilder.TestSuiteBuilder(FullTestSuite.class).includeAllPackagesUnderHere().build();
+   }
 
-  public FullTestSuite(){
-	super();
-  }
+   public FullTestSuite(){
+	  super();
+   }
 
 }
