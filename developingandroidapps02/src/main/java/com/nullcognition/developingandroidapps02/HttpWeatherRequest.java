@@ -27,7 +27,7 @@ public class HttpWeatherRequest{
 	int numDays = 7;
 
 
-	final String QUERY_PARAM = "id"; // note was q
+	final String QUERY_PARAM = "id"; // was q
 	final String FORMAT_PARAM = "mode";
 	final String UNITS_PARAM = "units";
 	final String DAYS_PARAM = "cnt";
