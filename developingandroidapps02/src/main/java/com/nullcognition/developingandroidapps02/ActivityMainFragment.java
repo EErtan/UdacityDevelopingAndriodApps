@@ -31,7 +31,7 @@ public class ActivityMainFragment extends Fragment{
 		super.onActivityCreated(savedInstanceState);
 		SingletonRequestQueue.INSTANCE.initContext(getActivity().getApplicationContext());
 
-		new HttpWeatherRequest(); // also do this example with the async task,
+		new HttpWeatherRequest(new String[]{"5992996"}); // also do this example with the async task,
 		// not needed if using volley which handles a new thread for you
 	}
 
@@ -49,7 +49,7 @@ public class ActivityMainFragment extends Fragment{
 	public boolean onOptionsItemSelected(MenuItem item){
 		int id = item.getItemId();
 		if(id == R.id.action_settings){return true;}
-		else if(id == R.id.action_refresh){new HttpWeatherRequest();}
+		else if(id == R.id.action_refresh){new HttpWeatherRequest(new String[]{"5992996"});}
 		return super.onOptionsItemSelected(item);
 	}
 
