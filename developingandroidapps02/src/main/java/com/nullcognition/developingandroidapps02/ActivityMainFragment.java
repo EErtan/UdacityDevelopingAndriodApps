@@ -1,6 +1,8 @@
 package com.nullcognition.developingandroidapps02;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,14 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
+import org.json.JSONException;
 
-import org.json.JSONObject;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,13 +23,11 @@ public class ActivityMainFragment extends Fragment{
 
 	public ActivityMainFragment(){}
 
+	public static final String[] cityId = {"5375480"};
+	ArrayAdapter<String> arrayAdapter = null;
 	@Override
 	public void onActivityCreated(final Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
-		SingletonRequestQueue.INSTANCE.initContext(getActivity().getApplicationContext());
-
-		new HttpWeatherRequest(new String[]{"5992996"}); // also do this example with the async task,
-		// not needed if using volley which handles a new thread for you
 	}
 
 	@Override
@@ -41,7 +36,7 @@ public class ActivityMainFragment extends Fragment{
 		setHasOptionsMenu(true);
 	}
 	@Override
-	public void  onCreateOptionsMenu(Menu menu,MenuInflater inflater){
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
 		inflater.inflate(R.menu.menu_activity_main, menu);
 	}
 
@@ -49,7 +44,9 @@ public class ActivityMainFragment extends Fragment{
 	public boolean onOptionsItemSelected(MenuItem item){
 		int id = item.getItemId();
 		if(id == R.id.action_settings){return true;}
-		else if(id == R.id.action_refresh){new HttpWeatherRequest(new String[]{"5992996"});}
+		else if(id == R.id.action_refresh){
+			createArrayAdapterFromNetworkRequest();
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -59,10 +56,15 @@ public class ActivityMainFragment extends Fragment{
 		View rootView = inflater.inflate(R.layout.fragment_activity_main, container, false);
 
 		// in the viewgroup traverse to find the listview, be sure to cast, set the adapter to the arrayadapter from the list population method
-		((ListView) rootView.findViewById(R.id.fragment_activity_main_listview)).setAdapter(createArrayAdapterFromStringArray());
-
+		arrayAdapter = createArrayAdapterFromStringArray();
+		((ListView) rootView.findViewById(R.id.fragment_activity_main_listview)).setAdapter(arrayAdapter);
 		// after the rootView has the adapter set to its child list view, we can return the root view(whole tree(view group)) back to the caller
 		return rootView;
+	}
+
+	private void createArrayAdapterFromNetworkRequest(){
+		FetchWeatherTask fetchWeatherTask = new FetchWeatherTask(arrayAdapter, this.getActivity());
+		fetchWeatherTask.execute(cityId);
 	}
 
 	// prefer this method due to the atomic nature of the population
@@ -73,9 +75,7 @@ public class ActivityMainFragment extends Fragment{
 				"Wednesday - 2",
 				"Thursday - 3",
 				"Friday - 4"};
-
-		ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(listItems));
-		return new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, arrayList);
+		return new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, new ArrayList<String>(Arrays.asList(listItems)));
 	}
 
 	// another way to add objects to the array list
@@ -90,12 +90,41 @@ public class ActivityMainFragment extends Fragment{
 		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, listItems);
 	}
 
+	public static class FetchWeatherTask extends AsyncTask<String, Void, String[]>{
+		FetchWeatherTask(ArrayAdapter<String> arrayAdapter, Activity activity){
+			this.arrayAdapter = arrayAdapter;
+			this.activity = activity;
+		}
+		Activity activity;
+		ArrayAdapter<String> arrayAdapter;
+		@Override
+		protected String[] doInBackground(final String... params){
 
+			HttpWeatherRequest httpWeatherRequest = new HttpWeatherRequest(params);
+			String[] forecasts = null;
+			try{
+				forecasts = ForecastParser.getWeatherDataFromJson(httpWeatherRequest.makeRequest(), 7);
+			}
+			catch(IOException e){
+				e.printStackTrace(); // from httpWeatherRequest.makeRequest
+			}
+			catch(JSONException e){
+				e.printStackTrace(); // from forecast parser
+			}
+			return forecasts;
+		}
 
-	@Override
-	public void onStop(){
-		super.onStop();
-		//stringRequest.cancel();
-
+		@Override
+		protected void onPostExecute(final String[] forecasts){
+			super.onPostExecute(forecasts);
+			if(arrayAdapter != null){
+				arrayAdapter.clear();
+				arrayAdapter.addAll(forecasts);
+			}
+			else{
+				arrayAdapter = new ArrayAdapter<String>(activity, R.layout.list_item_forecast, R.id.list_item_forecast_textview,
+						new ArrayList<String>(Arrays.asList(forecasts)));
+			}
+		}
 	}
 }
