@@ -14,7 +14,7 @@ public class ForecastParser{
 		SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
 		return shortenedDateFormat.format(time);
 	}
-	private static String formatHighLows(double high, double low) {
+	private static String formatHighLows(double high, double low){
 		long roundedHigh = Math.round(high);
 		long roundedLow = Math.round(low);
 
@@ -43,7 +43,7 @@ public class ForecastParser{
 		dayTime = new Time();
 
 		String[] resultStrs = new String[numDays];
-		for(int i = 0; i < weatherArray.length(); i++) {
+		for(int i = 0; i < weatherArray.length(); i++){
 			String day;
 			String description;
 			String highAndLow;
@@ -51,7 +51,7 @@ public class ForecastParser{
 			JSONObject dayForecast = weatherArray.getJSONObject(i);
 
 			long dateTime;
-			dateTime = dayTime.setJulianDay(julianStartDay+i);
+			dateTime = dayTime.setJulianDay(julianStartDay + i);
 			day = getReadableDateString(dateTime);
 
 			JSONObject weatherObject = dayForecast.getJSONArray(OWM_WEATHER).getJSONObject(0);
@@ -65,9 +65,7 @@ public class ForecastParser{
 			resultStrs[i] = day + " - " + description + " - " + highAndLow;
 		}
 
-		for (String s : resultStrs) {
-			Log.v("logErr", "Forecast entry: " + s);
-		}
+		for(String s : resultStrs){Log.v("logErr", "Forecast entry: " + s);}
 		return resultStrs;
 
 	}

@@ -2,6 +2,7 @@ package com.nullcognition.developingandroidapps02;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +11,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -52,13 +55,26 @@ public class ActivityMainFragment extends Fragment{
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-		// inflate the view first, then search the vg and add the aa
+		// inflate the view first, then search the view group and add the array adapter
 		View rootView = inflater.inflate(R.layout.fragment_activity_main, container, false);
 
 		// in the viewgroup traverse to find the listview, be sure to cast, set the adapter to the arrayadapter from the list population method
 		arrayAdapter = createArrayAdapterFromStringArray();
-		((ListView) rootView.findViewById(R.id.fragment_activity_main_listview)).setAdapter(arrayAdapter);
+		ListView listView = ((ListView) rootView.findViewById(R.id.fragment_activity_main_listview));
+		listView.setAdapter(arrayAdapter);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+			@Override
+			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id){
+				String forecast = arrayAdapter.getItem(position);
+				// Toast.makeText(getActivity(), , Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(getActivity(), ActivityDetail.class);
+				intent.putExtra(Intent.EXTRA_TEXT, forecast); // key: value
+				startActivity(intent);
+			}
+		});
 		// after the rootView has the adapter set to its child list view, we can return the root view(whole tree(view group)) back to the caller
+
+
 		return rootView;
 	}
 

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-	package = "com.nullcognition.developingandroidapps02"
-	xmlns:android = "http://schemas.android.com/apk/res/android"
+<manifest package = "com.nullcognition.developingandroidapps02"
+          xmlns:android = "http://schemas.android.com/apk/res/android"
 	>
 
-
-
-	<uses-permission
-		android:name = "android.permission.INTERNET"
-		/>
+	<uses-permission android:name = "android.permission.INTERNET"/>
 
 	<application
 		android:allowBackup = "true"
@@ -25,6 +20,16 @@
 
 				<category android:name = "android.intent.category.LAUNCHER"/>
 			</intent-filter>
+		</activity>
+		<activity
+			android:label = "@string/title_activity_activity_detail"
+			android:name = ".ActivityDetail"
+			android:parentActivityName = ".ActivityMain"
+			>
+			<meta-data
+				android:name = "android.support.PARENT_ACTIVITY"
+				android:value = "com.nullcognition.developingandroidapps02.ActivityMain"
+				/>
 		</activity>
 	</application>
 
