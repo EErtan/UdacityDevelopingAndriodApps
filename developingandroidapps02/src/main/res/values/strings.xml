@@ -7,4 +7,5 @@
 	<string name="title_activity_test">Test</string>
 	<string name = "action_refresh">Refresh</string>
 	<string name = "title_activity_activity_detail">ActivityDetail</string>
+	<string name = "action_implicit">Implicit Intent</string>
 </resources>

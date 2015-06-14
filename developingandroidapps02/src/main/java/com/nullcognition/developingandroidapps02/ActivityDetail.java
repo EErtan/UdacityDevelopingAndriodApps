@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class ActivityDetail extends Activity{
 
@@ -19,10 +20,10 @@ public class ActivityDetail extends Activity{
 		if(savedInstanceState == null){
 
 			getFragmentManager().beginTransaction()
-			                    .add(R.id.container, new PlaceholderFragment())
+			                    .add(R.id.fragment, new PlaceholderFragment())
 			                    .commit();
 		}
-		String forecast = (String) getIntent().getExtras().get(Intent.EXTRA_TEXT);
+
 	}
 
 
@@ -42,6 +43,7 @@ public class ActivityDetail extends Activity{
 
 		//noinspection SimplifiableIfStatement
 		if(id == R.id.action_settings){
+			startActivity(new Intent(this, SettingsActivity.class));
 			return true;
 		}
 
@@ -57,10 +59,16 @@ public class ActivityDetail extends Activity{
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		                         Bundle savedInstanceState){
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
+			Intent intent = getActivity().getIntent();
 
 			View rootView = inflater.inflate(R.layout.activity_fragment_detail, container, false);
+
+			if(intent != null && intent.hasExtra(Intent.EXTRA_TEXT)){
+				String forecast = intent.getStringExtra(Intent.EXTRA_TEXT);
+				((TextView) rootView.findViewById(R.id.detail_text)).setText(forecast);
+			}
 			return rootView;
 		}
 	}

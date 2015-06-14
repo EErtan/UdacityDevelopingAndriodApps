@@ -3,8 +3,11 @@ package com.nullcognition.developingandroidapps02;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -37,17 +41,27 @@ public class ActivityMainFragment extends Fragment{
 	public void onCreate(final Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		// polling the shared preferences for key:val
+//		cityId[0] = PreferenceManager.getDefaultSharedPreferences(getActivity())
+//		.getString("key", "defaultValue");
 	}
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-		inflater.inflate(R.menu.menu_activity_main, menu);
+		inflater.inflate(R.menu.menu_activity_main, menu);// must be inflated prior to looxinf for the minu item for the  share action privder
+		ShareActionProvider mShareActionProvider;
+		MenuItem item = menu.findItem(R.id.menu_item_share);
+		mShareActionProvider = (ShareActionProvider) item.getActionProvider();
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		int id = item.getItemId();
-		if(id == R.id.action_settings){return true;}
+		if(id == R.id.action_settings){
+			Toast.makeText(getActivity(), "action settings", Toast.LENGTH_SHORT).show();
+			startActivity(new Intent(getActivity(), SettingsActivity.class));
+		}
 		else if(id == R.id.action_refresh){
+			Toast.makeText(getActivity(), "action refresh", Toast.LENGTH_SHORT).show();
 			createArrayAdapterFromNetworkRequest();
 		}
 		return super.onOptionsItemSelected(item);
@@ -106,6 +120,7 @@ public class ActivityMainFragment extends Fragment{
 		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, listItems);
 	}
 
+	// ** the free api is no longer working **
 	public static class FetchWeatherTask extends AsyncTask<String, Void, String[]>{
 		FetchWeatherTask(ArrayAdapter<String> arrayAdapter, Activity activity){
 			this.arrayAdapter = arrayAdapter;
@@ -132,7 +147,11 @@ public class ActivityMainFragment extends Fragment{
 
 		@Override
 		protected void onPostExecute(final String[] forecasts){
-			super.onPostExecute(forecasts);
+//			super.onPostExecute(forecasts);
+			if(forecasts == null){
+				Log.e("logErr", "null array in onPost Execute");
+				return;
+			}
 			if(arrayAdapter != null){
 				arrayAdapter.clear();
 				arrayAdapter.addAll(forecasts);
