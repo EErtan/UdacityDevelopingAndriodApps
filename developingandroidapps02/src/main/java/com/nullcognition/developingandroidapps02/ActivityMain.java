@@ -15,6 +15,11 @@ public class ActivityMain extends Activity{
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		createLocationEntryDatabaseTable();
+	}
+	private void createLocationEntryDatabaseTable(){
+
 	}
 
 // Mini-Lesson: Broadcast receivers can be set in the activity, thus lasts for the the lifetime of the activity
