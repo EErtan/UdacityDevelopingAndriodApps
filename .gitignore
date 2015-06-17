@@ -3,3 +3,5 @@
 /.idea/workspace.xml
 .DS_Store
 /build
+
+lesson04/src/main/res/values/api_keys.xml
