@@ -1,4 +1,4 @@
-package com.nullcognition.lesson04;// Created by ersin on 17/06/15
+package com.nullcognition.lesson04.http;// Created by ersin on 17/06/15
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.nullcognition.lesson04.R;
 
 import java.util.Arrays;
 

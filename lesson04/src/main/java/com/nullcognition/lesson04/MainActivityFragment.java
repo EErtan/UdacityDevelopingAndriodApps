@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nullcognition.lesson04.http.HttpGetWeatherData;
+
 public class MainActivityFragment extends Fragment{
 
 	private final String TAG = "MainActivityFragment";

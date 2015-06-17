@@ -1,9 +1,10 @@
-package com.nullcognition.lesson04;// Created by ersin on 17/06/15
+package com.nullcognition.lesson04.http;// Created by ersin on 17/06/15
 
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.nullcognition.lesson04.http.AsyncHttpGet;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.OkHttpClient;
