@@ -8,12 +8,27 @@ import android.view.ViewGroup;
 
 public class MainActivityFragment extends Fragment{
 
+	private final String TAG = "MainActivityFragment";
+
 	public MainActivityFragment(){
 	}
 
 	@Override
+	public void onCreate(final Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+	}
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState){
-		return inflater.inflate(R.layout.fragment_main, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+		Object[] contextAndList = {getActivity(), rootView.findViewById(R.id.listView)};
+		HttpGetWeatherData.get(contextAndList);
+
+
+		return rootView;
 	}
+
+
 }
