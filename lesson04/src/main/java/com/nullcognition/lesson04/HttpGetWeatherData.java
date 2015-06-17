@@ -1,17 +1,29 @@
 package com.nullcognition.lesson04;// Created by ersin on 17/06/15
 
+import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
+import com.squareup.okhttp.Cache;
+import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import java.io.File;
 import java.io.IOException;
 
 public class HttpGetWeatherData{
 
 	public static void get(final Object[] contextAndList){
 
+		if(client == null){
+			try{ CacheResponse(new File(((Context) contextAndList[0]).getFilesDir(), "myCache"));}
+			catch(Exception e){
+				e.printStackTrace();
+				Log.e(TAG, "get caching error");
+			}
+		}
 		AsyncHttpGet asyncHttpGet = new AsyncHttpGet();
 		asyncHttpGet.execute(contextAndList);
 	}
@@ -26,12 +38,18 @@ public class HttpGetWeatherData{
 		Response response = client.newCall(request).execute();
 		if(!response.isSuccessful()){ throw new IOException("Unexpected code " + response); }
 
-//		Headers responseHeaders = response.headers();
-//		for(int i = 0; i < responseHeaders.size(); i++){
-//			Log.e(TAG, responseHeaders.name(i) + ": " + responseHeaders.value(i));
-//		}
+		Headers responseHeaders = response.headers();
+		for(int i = 0; i < responseHeaders.size(); i++){
+			Log.e(TAG, responseHeaders.name(i) + ": " + responseHeaders.value(i));
+		}
 
-		return response.body().string();
+		String responseBody = response.body().string();
+		Log.e(TAG, "Response 1 response:          " + response);
+		Log.e(TAG, "Response 1 cache response:    " + response.cacheResponse());
+		Log.e(TAG, "Response 1 network response:  " + response.networkResponse());
+
+
+		return responseBody;
 	}
 
 	private static String buildURL(){
@@ -42,7 +60,15 @@ public class HttpGetWeatherData{
 				.build().toString();
 	}
 
-	private static final OkHttpClient client = new OkHttpClient();
+	private static void CacheResponse(File cacheDirectory) throws Exception{
+		int cacheSize = 10 * 1024 * 1024; // 10 MiB
+		Cache cache = new Cache(cacheDirectory, cacheSize);
+
+		client = new OkHttpClient();
+		client.setCache(cache);
+	}
+
+	private static OkHttpClient client = null;
 	public static final String TAG = "HtGeWeData";
 
 	private static final String baseURL = "http://api.openweathermap.org/data/2.5";
