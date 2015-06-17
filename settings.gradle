@@ -1,1 +1,1 @@
-include ':app', ':developingandroidapps02', ':androidlibrary01', ':contentprovider'
+include ':app', ':developingandroidapps02', ':androidlibrary01', ':contentprovider', ':lesson04'
