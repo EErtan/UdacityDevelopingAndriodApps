@@ -49,7 +49,6 @@ public class HttpGetWeatherData{
 		Log.e(TAG, "Response 1 cache response:    " + response.cacheResponse());
 		Log.e(TAG, "Response 1 network response:  " + response.networkResponse());
 
-
 		return responseBody;
 	}
 
