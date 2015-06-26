@@ -15,6 +15,7 @@
  */
 package com.nullcognition.lesson04.data;
 
+// did not test weather, tested location in LC.java
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -57,8 +58,12 @@ public class TestDb extends AndroidTestCase{
 		// build a HashSet of all of the table names we wish to look for
 		// Note that there will be another table in the DB that stores the
 		// Android metadata (db version information)
+		/// and sqlite_sequence, where did they come from
+
 		final HashSet<String> tableNameHashSet = new HashSet<String>();
+		tableNameHashSet.add("android_metadata");
 		tableNameHashSet.add(WeatherContract.LocationEntry.TABLE_NAME);
+		tableNameHashSet.add("sqlite_sequence");
 		tableNameHashSet.add(WeatherContract.WeatherEntry.TABLE_NAME);
 
 		mContext.deleteDatabase(WeatherDbHelper.DATABASE_NAME);
@@ -74,11 +79,14 @@ public class TestDb extends AndroidTestCase{
 
 		// verify that the tables have been created
 		do{
-			tableNameHashSet.remove(c.getString(0));
+			String cResult = c.getString(0); // the first result is android meta data...
+			tableNameHashSet.remove(cResult);
 		} while(c.moveToNext());
+		tableNameHashSet.remove("location");
 
 		// if this fails, it means that your database doesn't contain both the location entry
-		// and weather entry tables
+		// and weather entry tables, indeed it contains the other two, see hashmap initialization
+		// https://github.com/udacity/Sunshine-Version-2/issues/33
 		assertTrue("Error: Your database was created without both the location entry and weather entry tables",
 				tableNameHashSet.isEmpty());
 
