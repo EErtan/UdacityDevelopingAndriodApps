@@ -27,7 +27,7 @@ import android.text.format.Time;
  */
 public class WeatherContract{
 
-	public static final String CONTENT_AUTHORITY = "com.example.android.sunshine.app";
+	public static final String CONTENT_AUTHORITY = "com.nullcognition.lesson04";
 
 	// Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
 	// the content provider.

@@ -25,7 +25,7 @@ import com.nullcognition.lesson04.data.WeatherContract.WeatherEntry;
 public class WeatherDbHelper extends SQLiteOpenHelper{
 
 	// If you change the database schema(table format in the contract class), you must manually increment the database version.
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 
 	public static final String DATABASE_NAME = "weather.db";
 
