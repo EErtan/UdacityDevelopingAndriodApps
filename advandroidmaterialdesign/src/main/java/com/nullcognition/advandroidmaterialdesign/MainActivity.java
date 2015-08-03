@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+// Material Design: uses 500 as the base color, pic a lighter color in the 100 range, and a darker
+// color in the 700-800 range - after choose an A for accent color to harmonize with the first
+
 public class MainActivity extends AppCompatActivity{
 
 	@Override
@@ -15,19 +18,14 @@ public class MainActivity extends AppCompatActivity{
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu){
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		//noinspection SimplifiableIfStatement
 		if(id == R.id.action_settings){
 			return true;
 		}
