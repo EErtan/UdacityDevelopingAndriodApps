@@ -1,0 +1,28 @@
+<resources>
+
+	<!-- Base application theme. -->
+	<style name="PPAppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+		<item name="colorPrimary">@color/ppprimary</item>
+		<item name="colorPrimaryDark">@color/ppprimarydark</item>
+		<item name="colorAccent">@color/ppaccent</item>
+		<item name="toolbarStyle">@style/PPToolbar</item>
+	</style>
+
+
+	<!-- Settings activity theme. -->
+	<style name="PPSettingsTheme" parent="AppTheme">
+	</style>
+
+	<style name="PPMain" parent="@style/PPAppTheme"/>
+
+	<style name="PPDetails" parent="@style/PPAppTheme"/>
+
+
+	<!-- main activity toolbar style that does not add an action bar by default, as we will add one ourselves-->
+	<style name="PPToolbar" parent="Widget.AppCompat.Toolbar">
+		<item name="android:background">@color/ppaccent</item>
+		<item name="popupTheme">@style/Theme.AppCompat.Light</item>
+	</style>
+
+
+</resources>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:layout_height = "match_parent"
+	android:layout_width = "match_parent"
+	android:orientation = "vertical"
+	xmlns:android = "http://schemas.android.com/apk/res/android"
+	xmlns:app = "http://schemas.android.com/apk/res-auto"
+	xmlns:tools = "http://schemas.android.com/tools"
+
+	>
+
+	<!-- should be outside of the gridlayout-->
+	<android.support.v7.widget.Toolbar
+		android:background = "@color/ppaccent"
+		android:layout_height = "wrap_content"
+		android:layout_width = "match_parent"
+		android:theme = "@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+		>
+
+		<ImageView
+			android:gravity = "center_horizontal"
+			android:layout_width = "match_parent"
+			android:layout_height = "?attr/listPreferredItemHeight"
+			android:layout_marginTop="@dimen/growable_margin_top"
+			android:scaleType = "center"
+			android:src = "@drawable/abc_btn_check_to_on_mtrl_015"
+			/>
+
+	</android.support.v7.widget.Toolbar>
+
+
+	<!-- no need to define backgroud as it is defined in toolbar-->
+
+	<android.support.v7.widget.GridLayout
+		android:background = "@color/accent"
+		android:layout_height = "match_parent"
+		android:layout_width = "match_parent"
+		app:columnCount = "2"
+		xmlns:android = "http://schemas.android.com/apk/res/android"
+		xmlns:app = "http://schemas.android.com/apk/res-auto"
+		xmlns:tools = "http://schemas.android.com/tools"
+		android:elevation = "1dp"
+		>
+
+		<android.support.v7.widget.Space
+			app:layout_columnSpan = "2"
+			app:layout_columnWeight = "1"
+			app:layout_rowWeight = "1"
+			/>
+
+		<TextView
+			android:fontFamily = "sans-serif"
+			android:gravity = "center_horizontal"
+			android:id = "@+id/detail_date_textview"
+			android:layout_marginBottom = "@dimen/abc_list_item_padding_horizontal_material"
+			android:layout_marginTop = "@dimen/abc_list_item_padding_horizontal_material"
+			android:text = "Today, Aug 03 2015"
+			android:textAppearance = "@style/TextAppearance.AppCompat.Title"
+			android:textColor = "@color/secondary_text"
+			app:layout_columnSpan = "2"
+			app:layout_columnWeight = "1"
+			app:layout_gravity = "fill_horizontal"
+			tools:text = "Today, April 03"
+			/>
+
+		<ImageView
+			android:adjustViewBounds = "true"
+			android:id = "@+id/detail_icon"
+			android:layout_width = "0dp"
+			android:maxHeight = "@dimen/today_icon"
+			android:maxWidth = "@dimen/today_icon"
+			android:src = "@drawable/abc_btn_check_to_on_mtrl_015"
+			app:layout_columnWeight = "1"
+			app:layout_gravity = "fill_horizontal"
+			tools:src = "@drawable/abc_btn_check_to_on_mtrl_015"
+			/>
+
+		<TextView
+			android:fontFamily = "sans-serif-light"
+			android:gravity = "center_horizontal"
+			android:id = "@+id/detail_high_textview"
+			android:layout_width = "0dp"
+			android:text = "19"
+			android:textColor = "@color/primary_text"
+			android:textSize = "72sp"
+			app:layout_columnWeight = "1"
+			app:layout_gravity = "fill_horizontal"
+			tools:text = "19"
+			/>
+
+		<TextView
+			android:fontFamily = "sans-serif"
+			android:gravity = "center_horizontal"
+			android:id = "@+id/detail_forecast_textview"
+			android:layout_width = "0dp"
+			android:text = "Rainy"
+			android:textAppearance = "@style/TextAppearance.AppCompat.Title"
+			android:textColor = "@color/secondary_text"
+			app:layout_columnWeight = "1"
+			app:layout_gravity = "fill_horizontal"
+			tools:text = "Rainy"
+			/>
+
+		<TextView
+			android:fontFamily = "sans-serif-light"
+			android:gravity = "center_horizontal"
+			android:id = "@+id/detail_low_textview"
+			android:layout_marginBottom = "@dimen/abc_list_item_padding_horizontal_material"
+			android:layout_width = "0dp"
+			android:text = "10"
+			android:textColor = "@color/secondary_text"
+			android:textSize = "36sp"
+			app:layout_columnWeight = "1"
+			app:layout_gravity = "fill_horizontal"
+			tools:text = "10"
+			/>
+
+		<android.support.v7.widget.Space
+			app:layout_columnSpan = "2"
+			app:layout_columnWeight = "1"
+			app:layout_rowWeight = "1"
+			/>
+
+	</android.support.v7.widget.GridLayout>
+
+</LinearLayout>
