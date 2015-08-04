@@ -1,30 +1,33 @@
 <resources>
 
 	<!-- Base application theme. -->
-	<style
-		name = "AppTheme"
-		parent = "android:Theme.Holo.Light"
-		>
-		<!--<item name = "colorPrimary">@color/primary</item>-->
-		<!--<item name = "colorPrimaryDark">@color/primary_dark</item>-->
-		<!--<item name = "colorPrimaryAccent">@color/accent</item>-->
+	<style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+		<item name="colorPrimary">@color/primary</item>
+		<item name="colorPrimaryDark">@color/primary_dark</item>
+		<item name="colorAccent">@color/accent</item>
+		<item name="toolbarStyle">@style/Toolbar</item>
 	</style>
 
-	<!-- Main app theme-->
-	<style
-		name = "MainTheme"
-		parent = "AppTheme"
-		>
-		<item name = "actionBarStyle">@style/ActionBar.Solid</item>
+
+	<!-- Settings activity theme. -->
+	<style name="SettingsTheme" parent="AppTheme">
 	</style>
 
-	<!-- Main activity action bar theme-->
-	<style
-		name = "ActionBar.Solid"
-		parent = "android:Widget.DeviceDefault.ActionButton"
-		>
-		<item name = "displayOptions">useLogo|showHome</item>
-		<item name = "logo">@drawable/abc_btn_rating_star_on_mtrl_alpha</item>
+	<style name="AppTheme.Main" parent="@style/AppTheme"/>
+
+	<style name="AppTheme.Details" parent="@style/AppTheme"/>
+
+
+	<!-- main activity toolbar style that does not add an action bar by default, as we will add one ourselves-->
+	<style name="Toolbar" parent="Widget.AppCompat.Toolbar">
+		<item name="android:background">?attr/colorPrimary</item>
+		<item name="popupTheme">@style/Theme.AppCompat.Light</item>
+	</style>
+
+	<!-- Style for forecast listview -->
+	<style name="ForecastListStyle">
+		<!-- Here it's a stub.  In screens of sufficient width, this style includes modifications
+		for two-pane layout -->
 	</style>
 
 

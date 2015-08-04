@@ -3,4 +3,9 @@
 
 	<string name = "hello_world">Hello world!</string>
 	<string name = "action_settings">Settings</string>
+	<string name = "title_activity_main2">Main2Activity</string>
+	<string name = "humidity">humid</string>
+	<string name = "pressure">pressure</string>
+	<string name = "wind">wind</string>
+	<string name = "action_share">Share</string>
 </resources>
