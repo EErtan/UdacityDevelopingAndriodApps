@@ -8,4 +8,6 @@
 	<string name = "pressure">pressure</string>
 	<string name = "wind">wind</string>
 	<string name = "action_share">Share</string>
+	<string name = "title_activity_card_view_elevations">CardViewElevations</string>
+	<string name = "title_activity_parallax">Parallax</string>
 </resources>
